@@ -16,21 +16,58 @@ The `Master Manifest` is the most top-level part of an HLS stream. It describes 
 ##### .ts File
 The `.ts` file, or transport stream, is the container for audio and video of a stream. It also contains information about when the media is supposed to be played. However, the browser cannot natively understand what to do with it. It's up to the player to transform this file into an .mp4 the browser can understand.
 
-## Debugging
+## Tools
 #### The Console
-The console is your best friend and should always be monitored while investigating a stream.
+The console is your best friend and should always be monitored while investigating a stream. **Open the console and keep it open while debugging.**
 
-1.  Open the console, and keep it open
- - Are there any errors?
-  - Network: `4xx`, `5xx`, crossdomain
-  - Uncaught Exception
- - Are there any warnings?
-  - `Hlsjs error`
+Tips:
+- Use the filters to see just `errors` or `warnings`, or both
+ - Errors are usually bad
+    - Network: `4xx`, `5xx`, crossdomain error
+    - Uncaught Exceptions
+ - Warnings are not always bad
+ 
+
+
+#### The Network Tab
+The network tab is also your best friend.
+
+Tips:
+- Filter by `.ts` to see video segments
+- Filter by `.m3u8` to see  manifests
+- Filter by `.vtt` to vtt subtitles
+- Only starts recording when opened - do a hard refresh to see everything downloaded from the start of the stream
+
+#### Safari
+Safari is our gold standard. If it works in Safari it should work in our player; if not, we will not pursue a solution.
+
+Tips:
+- Streams which crash after a certain duration in our player will often play for longer in Safari (but will still crash). Always test longer in Safari
+
+#### Hls.js Reference Page
+The Hls.js reference page is useful for zeroing in on where a problem is: our player, our version of hls.js, or all versions of hls.js.
+
+Tips:
+- Start by testing the stream in the latest reference player
+- If it works in the latest reference player, test our version of the reference player
+- If it doesn't work in our version of the reference player, test increasing versions inbetween our version and the latest to find the first working version
+
+## Debugging Checklist
+1. Are there any errors in the console?
+    - Network
 2. Does it work in Safari?
- - Allow the stream to continue to play - it may break later than our player
 3. Does it work in the latest version of the Hls.js reference player?
 4. Does it work in our version of the Hls.js reference player?
-  
+
+
+## Common Error Types
+### Encoding Errors
+- Check the codec
+### Customer Errors
+### Player Errors
+
+## Reports
+[ ]
 
 
 ## Help! My Stream Doesn't Work!
@@ -47,9 +84,10 @@ The console is your best friend and should always be monitored while investigati
 
 #### The stream is buffering a lot
 
-#### The stream isn't Vive/DVR/VOD when it should be
+#### The stream isn't Live/DVR/VOD when it should be
 
 #### The player crashes
 
- 
+
+## Case Studies
 
